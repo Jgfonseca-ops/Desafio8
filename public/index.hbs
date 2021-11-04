@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi plantilla de Ingreso de Datos en EJS</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="./socket.io/socket.io.js"></script>
+    
+</head>
+
+<body>
+    <div class="container mt-3">
+        <div class="jumbotron">          
+               
+<h1 style="color:blue;">Ingrese datos</h1>
+<br>
+
+<form  onsubmit="nuevoCliente(event)">
+
+    <div class="form-group">
+        <label for="nombre"><b>Nombre</b></label>
+        <input id="nombre" class="form-control" type="text" name="nombre">
+    </div>
+
+    <div class="form-group">
+        <label for="apellido"><b>Apellido</b></label>
+        <input id="apellido" class="form-control" type="text" name="apellido">
+    </div>
+
+    <div class="form-group">
+        <label for="edad"><b>Edad</b></label>
+        <input id="edad" class="form-control" type="number" name="edad">
+    </div>
+
+    <div class="form-group">
+        <label for="id"><b>ID</b></label>
+        <input id="id" class="form-control" type="number" name="id">
+        
+    </div>
+    
+    <input type="submit" class="btn btn-success mt-3 mb-5">
+</form>
+
+
+
+<h1 style="color:blue;font-size: 30px;">Centro de Mensajes</h1>
+
+<input id="chat" type="text">
+<button id="botonEnviar">Enviar</button>
+<p></p>
+<script src="./index.js"></script>
+</div>
+
+
+
+
+<h2 style="color:crimson;">Historial</h2>
+<div class="table-responsive">
+   
+    
+    <table class="table table-dark">
+        <tr style="color: yellow;">
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Edad</th>
+        </tr>
+
+        {{#each clientes}}
+        <tr>
+            <td> {{this.nombre}}</td>
+            <td> {{this.apellido}}</td>
+            <td> {{this.edad}}</td>
+        </tr>
+        {{/each}}
+<!--
+        <tr>
+            <td id='uno'>
+                
+            </td>
+            <td id='dos'>
+                
+            </td>
+            <td id='tres'>
+                
+            </td>
+        </tr> -->
+       </table> 
+       
+
+
+</div>
+
+
+
+</body>
+
+</html>
+

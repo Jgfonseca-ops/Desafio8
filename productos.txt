@@ -1,0 +1,38 @@
+[
+  {
+    "nombre": "escuadra",
+    "apellido": 22.5,
+    "edad": "url",
+    "id": 1
+  },
+  {
+    "nombre": "regla",
+    "apellido": 50.5,
+    "edad": "url2",
+    "id": 2
+  },
+  {
+    "nombre": "cuaderno",
+    "apellido": 98.15,
+    "edad": "url3",
+    "id": 3
+  },
+  {
+    "nombre": "hojas",
+    "apellido": 158.23,
+    "edad": "url4",
+    "id": 4
+  },
+  {
+    "nombre": "borrador",
+    "apellido": 23.52,
+    "edad": "url5",
+    "id": 5
+  },
+  {
+    "nombre": "Fee",
+    "apellido": 358.96,
+    "edad": "url6",
+    "id": 6
+  }
+]
