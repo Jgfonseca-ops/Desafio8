@@ -6,6 +6,12 @@ const app = express();
 const httpServer = new HttpServer(app);
 const io = new IOServer(httpServer);
 
+const ClienteSql = require('./ClaseMySQL.js');
+const { options } = require('./mysql.js');
+const knex = require('knex')(options);
+
+
+
 const PORT = 8080;
 const mensajes = [];
 
@@ -31,8 +37,8 @@ app.get('/', (req, res) => {
     res.render('index', {clientes});
 });
 //--------------------------------------------------------------------
-const objeto1 = require('./Clase-Docs.js');
-const { extname } = require('path');
+//const objeto1 = require('./Clase-Docs.js');
+//const { extname } = require('path');
 app.use(express.urlencoded({extended: true}));
 
 
@@ -60,6 +66,16 @@ io.on('connection', (socket) => {
     /* io.sockets.emit('baseclientes', clientes)*/ });
     
 });
+
+
+//----------------------------------------------------------------------Lógica de Base de datos
+const sql = new ClienteSql(options, "tabla2");
+sql.crearTabla();
+sql.insertarArticulos([
+  {nombre:"Federico",apellido:"Martinez", edad:27},
+  {nombre:"Leandro",apellido:"Puig", edad:34}
+])
+sql.borrarArticuloPorId(2)
 
 
 app.use(express.json())
