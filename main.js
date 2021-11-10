@@ -57,7 +57,7 @@ io.on('connection', (socket) => {
     socket.on('clientenuevo', (data) => {      
         clientes.push(data);
         console.log(clientes);
-        io.sockets.emit('baseclientes', clientes) });
+    /* io.sockets.emit('baseclientes', clientes)*/ });
     
 });
 
