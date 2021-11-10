@@ -12,6 +12,7 @@ const ClienteSql = require('./ClaseMySQL.js');
 const { options } = require('./mysql.js');
 const knex = require('knex')(options);
 
+
 const sql = new ClienteSql(options, "Clientes");
 sql.crearTabla();
 
@@ -60,8 +61,8 @@ io.on('connection', (socket) => {
 //----------------------------------------------------------------Para el ingreso de nuevo cliente
     socket.on('clientenuevo', async (data) => {    
         try {
-        await sql.insertarClientes(data);
-        console.log(data) }
+        await sql.insertarClientes(data)
+        }
         catch (error) {
         console.log(error)}
 
