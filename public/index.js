@@ -1,6 +1,6 @@
 const socket = io();
 
-//Para ingreso nuevo cliente
+//Para ingreso nuevo cliente--------------------
 function nuevoCliente(event) {
     const nombre = document.getElementById('nombre').value; 
     const apellido = document.getElementById('apellido').value; 
@@ -8,9 +8,8 @@ function nuevoCliente(event) {
     const id = document.getElementById('id').value;
     const objeto= {nombre: nombre, apellido: apellido,edad: edad, id: id}
     socket.emit('clientenuevo', objeto);
-     //   event.preventDefault()
-}
 
+}
 
 //Para el chat
 const input = document.getElementById('chat')

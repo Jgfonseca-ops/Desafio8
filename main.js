@@ -6,19 +6,23 @@ const app = express();
 const httpServer = new HttpServer(app);
 const io = new IOServer(httpServer);
 
+//DB de clientes--------------------------------------------------
+
 const ClienteSql = require('./ClaseMySQL.js');
 const { options } = require('./mysql.js');
 const knex = require('knex')(options);
 
-
+const sql = new ClienteSql(options, "Clientes");
+sql.crearTabla();
 
 const PORT = 8080;
 const mensajes = [];
 
 const clientes = [];
+
+
+//--------------------------------------------------------------
 app.use(express.static('./public'));
-
-
 app.engine(
     "hbs",
     handlebars({
@@ -37,13 +41,7 @@ app.get('/', (req, res) => {
     res.render('index', {clientes});
 });
 //--------------------------------------------------------------------
-//const objeto1 = require('./Clase-Docs.js');
-//const { extname } = require('path');
 app.use(express.urlencoded({extended: true}));
-
-
-
-
 httpServer.listen(PORT, () => {
     console.log('Servidor HTTP escuchando en el puerto', PORT);
 });
@@ -59,23 +57,16 @@ io.on('connection', (socket) => {
         mensajes.push({ socketid: socket.id, mensaje: data});
         io.sockets.emit('mensajes', mensajes) });
 
-//---------------------------------------------------------------------Para el ingreso de nuevo cliente
-    socket.on('clientenuevo', (data) => {      
-        clientes.push(data);
-        console.log(clientes);
-    /* io.sockets.emit('baseclientes', clientes)*/ });
+//----------------------------------------------------------------Para el ingreso de nuevo cliente
+    socket.on('clientenuevo', async (data) => {    
+        try {
+        await sql.insertarClientes(data);
+        console.log(data) }
+        catch (error) {
+        console.log(error)}
+
+  });
     
 });
-
-
-//----------------------------------------------------------------------Lógica de Base de datos
-const sql = new ClienteSql(options, "tabla2");
-sql.crearTabla();
-sql.insertarArticulos([
-  {nombre:"Federico",apellido:"Martinez", edad:27},
-  {nombre:"Leandro",apellido:"Puig", edad:34}
-])
-sql.borrarArticuloPorId(2)
-
 
 app.use(express.json())

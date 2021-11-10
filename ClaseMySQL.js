@@ -7,43 +7,43 @@ class ClienteSql {
                 this.tabla = tabla;
               }
 
-    crearTabla() {
+ async crearTabla() {
+        try {
             return knex.schema.createTable(this.tabla, table => {
                 table.string('nombre', 50).notNullable(); 
                 table.string('apellido', 50).notNullable(); 
                 table.integer('edad');
-                table.increments('id').primary();
-             })
-             .then(() => console.log('tabla creada'))
-             .catch((err) => {console.log(err); throw err})
-             .finally(()=> {
-                 knex.destroy();
-             })         
+                table.integer('id');
+             })}
+        catch (error){
+                console.log('No se pudo crear la tabla')
+            }           
+        }
+
+async insertarClientes(cliente) {
+        try{
+              return knex(this.tabla).insert(cliente) }
+        catch (error){
+                console.log('No se pudo guardar el contenido')
+            }
+        }     
+        
+async listarClientes() {
+        try {
+              return knex(this.tabla).select('*')}
+        catch (error){
+              console.log('No se pudo listar el contenido')
+            }
       }
 
-    insertarArticulos(articulos) {
-              return knex(this.tabla).insert(articulos)
-              .then(()=> console.log("data inserted"))
-              .catch((err) => { console.log(err); throw err})
-              .finally(()=> {
-                      knex.destroy();
-              })
+async borrarClientePorId(id) {
+        try {
+              return knex.from(this.tabla).where('id', id).del() }
+        catch (error){
+              console.log('No se pudo listar el contenido')
+              }
+             
             }
-
-    listarArticulos() {
-              return knex(this.tabla).select('*')
-     
-      }
-
-    borrarArticuloPorId(id) {
-              return knex.from(this.tabla).where('id', id).del()
-              .then(()=> console.log("data deleted"))
-              .catch((err) => { console.log(err); throw err})
-              .finally(()=> {
-                      knex.destroy();
-              })
-            }
-
 
 }
 
