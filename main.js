@@ -24,7 +24,7 @@ const clientes = [];
 
 //--------------------------------------------------------------
 app.use(express.static('./public'));
-app.engine(
+/*app.engine(
     "hbs",
     handlebars({
         extname: ".hbs",
@@ -32,10 +32,10 @@ app.engine(
         layoutsDir: __dirname + "/public",
        
     })
-);
+);*/
 
 app.set('views', './public');
-app.set('view engine', 'hbs');
+/*app.set('view engine', 'hbs');*/
 
 
 app.get('/', (req, res) => {
