@@ -67,16 +67,17 @@
             <th>Apellido</th>
             <th>Edad</th>
         </tr>
-<!--
-        {{#each clientes}}
-        <tr>
-            <td> {{this.nombre}}</td>
-            <td> {{this.apellido}}</td>
-            <td> {{this.edad}}</td>
-        </tr>
-        {{/each}}  -->
 
-       </table> 
+        
+        <% for( i=0; i< cliente.lenght; i++) { %>
+        <tr>
+            <td> <%= this.nombre %></td>
+            <td> <%= this.apellido %></td>
+            <td> <%= this.edad %></td>
+        </tr>
+         <% } %> 
+       
+    </table> 
        
 
 

@@ -27,16 +27,3 @@ socket.on('mensajes', data => {
 });
 
 
-/*socket.on('baseclientes', client => {
-
-    
-
-    const clienteNombre = client[0].nombre;
-    const clienteApellido = client[0].apellido;
-    const clienteEdad = client[0].edad;
-   
-    document.getElementById('uno').innerHTML = clienteNombre;
-    document.getElementById('dos').innerHTML = clienteApellido;
-    document.getElementById('tres').innerHTML = clienteEdad;
-    
-    }); */

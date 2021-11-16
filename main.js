@@ -1,7 +1,6 @@
 const express = require('express');
 const { Server: HttpServer } = require('http');
 const { Server: IOServer } = require('socket.io');
-const handlebars = require('express-handlebars');
 const app = express();
 const httpServer = new HttpServer(app);
 const io = new IOServer(httpServer);
@@ -19,27 +18,15 @@ sql.crearTabla();
 const PORT = 8080;
 const mensajes = [];
 
-const clientes = [];
-
-
 //--------------------------------------------------------------
 app.use(express.static('./public'));
-/*app.engine(
-    "hbs",
-    handlebars({
-        extname: ".hbs",
-        defaultLayout: "index.hbs",
-        layoutsDir: __dirname + "/public",
-       
-    })
-);*/
-
 app.set('views', './public');
-/*app.set('view engine', 'hbs');*/
+app.set('view engine', 'ejs');
 
-
-app.get('/', (req, res) => {
-    res.render('index', {clientes});
+app.get('/', async (req, res) => {
+    const cliente = await sql.listarClientes()
+    console.log(cliente);
+    res.render('index', {cliente});
 });
 //--------------------------------------------------------------------
 app.use(express.urlencoded({extended: true}));
@@ -67,6 +54,7 @@ io.on('connection', (socket) => {
         console.log(error)}
 
   });
+
     
 });
 
